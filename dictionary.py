@@ -1,5 +1,5 @@
 from wordnik import *
-import codecs
+import io
 import random
 
 def percent_vowels(word):
@@ -94,7 +94,7 @@ get_def = WordApi.WordApi(client)
 words = []
 correction_list = ['Plural form of ','Alternative spelling of ','Alternative form of ','Common misspelling of ','Plural of ','Same as ','See ','Present participle of ','Third-person singular simple present indicative form of ','Simple past tense and past participle of ','Archaic form of ']
 
-for i in range(0,10000):
+for i in range(0,8000):
 	words.append(unique_word())
 
 words.sort(cmp=lambda x,y: cmp("".join(l for l in x if l not in '\'-'), "".join(l for l in y if l not in '\'-')))
@@ -106,15 +106,15 @@ for word in words:
 	try:
 		if word[0] != cur_letter:
 			cur_letter = word[0]
-			dictionary += "\n\n"+cur_letter.capitalize()+":\n"
+			dictionary += "\n\n"+cur_letter.capitalize()+":"+u"\u000A"
 		definition = get_def.getDefinitions(rand_word.getRandomWord().word,limit=1)[0].text
-		dictionary += "\n"+word+": "
+		dictionary += u"\u000A"+word+": "
 		dictionary+= check_definition(definition)
 		print word
 	except:
 		print 'Took too long to respond'
 
-file = codecs.open("Selected Entries from the D'ksuban Dictionary.txt","w",encoding='utf-8')
+file = io.open("Selected Entries from the D'ksuban Dictionary.txt",mode="w",encoding='utf-16')
 file.write(dictionary)
 file.close()
 end_program = raw_input("Dictionary completed!")
