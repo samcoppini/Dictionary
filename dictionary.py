@@ -90,7 +90,8 @@ correction_list = [
 	'Present participle of ',
 	'Third-person singular simple present indicative form of ',
 	'Simple past tense and past participle of ',
-	'Archaic form of '
+	'Archaic form of ',
+	'Variant of '
 ]
 
 for i in range(0,8000):
