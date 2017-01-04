@@ -60,16 +60,14 @@ def unique_word():
 		return unique_word()
 
 def get_random_definition():
-	return word_api.getDefinitions(words_api.getRandomWord().word,limit=1)[0].text
-
-def check_definition(definition):
+	definition = word_api.getDefinitions(words_api.getRandomWord().word,limit=1)[0].text
 	for correction in correction_list:
-		if definition[0:len(correction)] == correction:
+		if definition[:len(correction)] == correction:
 			if random.random() > 0.6:
 				return correction + make_word() + '.'
 			else:
 				return check_definition(get_random_definition())
-	if definition[0:19] == 'The cardinal number':
+	if definition[:19] == 'The cardinal number':
 		return ('The cardinal number equal to the sum of ' +
 		        unique_word() + ' and ' + unique_word() + '.')
 	return definition
@@ -114,9 +112,8 @@ for word in words:
 	if word[0] != cur_letter:
 		cur_letter = word[0]
 		dictionary += "\n\n" + cur_letter.capitalize() + ":\n"
-	definition = get_random_definition()
 	dictionary += "\n" + word + ": "
-	dictionary += check_definition(definition)
+	dictionary += get_random_definition()
 	print(word)
 
 filename = "Selected Entries from the D'ksuban Dictionary.txt"
