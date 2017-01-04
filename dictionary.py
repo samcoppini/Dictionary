@@ -76,8 +76,19 @@ rand_word = WordsApi.WordsApi(client)
 get_def = WordApi.WordApi(client)
 
 words = []
-correction_list = ['Plural form of ','Alternative spelling of ','Alternative form of ','Common misspelling of ','Plural of ','Same as ','See ','Present participle of ','Third-person singular simple present indicative form of ','Simple past tense and past participle of ','Archaic form of ']
-
+correction_list = [
+	'Plural form of ',
+	'Alternative spelling of ',
+	'Alternative form of ',
+	'Common misspelling of ',
+	'Plural of ',
+	'Same as ',
+	'See ',
+	'Present participle of ',
+	'Third-person singular simple present indicative form of ',
+	'Simple past tense and past participle of ',
+	'Archaic form of '
+]
 for i in range(0,8000):
 	words.append(unique_word())
 
