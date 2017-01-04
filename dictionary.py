@@ -66,7 +66,7 @@ def get_random_definition():
 			if random.random() > 0.6:
 				return correction + make_word() + '.'
 			else:
-				return check_definition(get_random_definition())
+				return get_random_definition()
 	if definition[:19] == 'The cardinal number':
 		return ('The cardinal number equal to the sum of ' +
 		        unique_word() + ' and ' + unique_word() + '.')
