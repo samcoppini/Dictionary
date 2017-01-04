@@ -1,5 +1,6 @@
 from wordnik import *
 import io
+import os
 import random
 
 def percent_vowels(word):
@@ -14,14 +15,14 @@ def make_word():
 		if word[-1] == 'a':
 			word += random.choice('bndkpstuxxxx')
 		elif word[-1] == 'b':
-			if len(word) > 2 and word[-2] != 'b': 
+			if len(word) > 2 and word[-2] != 'b':
 				word += random.choice('aioub\'x')
-			else:	
+			else:
 				word += random.choice('aiou\'x')
 		elif word[-1] == 'd':
-			if len(word) > 2 and word[-2] != 'd': 
+			if len(word) > 2 and word[-2] != 'd':
 				word += random.choice('aioud\'xx')
-			else:	
+			else:
 				word += random.choice('aiou\'xx')
 		elif word[-1] == 'f':
 			word += random.choice('aiol\'xx')
@@ -72,7 +73,7 @@ def unique_word():
 		return word
 	else:
 		return unique_word()
-		
+
 def check_definition(definition):
 	for correction in correction_list:
 		if definition[0:len(correction)] == correction:
@@ -82,22 +83,22 @@ def check_definition(definition):
 				return check_definition(get_def.getDefinitions(rand_word.getRandomWord().word,limit=1)[0].text)
 	if definition[0:19] == 'The cardinal number':
 		return 'The cardinal number equal to the sum of '+unique_word()+' and '+unique_word()+'.'
-	return definition	
-	
+	return definition
+
 apiUrl = 'http://api.wordnik.com/v4'
-apiKey = '5a5dc229807e6f9ac7100019db5059207afa044bc21023efa'
+apiKey = os.getenv('API_KEY')
 client = swagger.ApiClient(apiKey, apiUrl)
 
 rand_word = WordsApi.WordsApi(client)
 get_def = WordApi.WordApi(client)
-		
+
 words = []
 correction_list = ['Plural form of ','Alternative spelling of ','Alternative form of ','Common misspelling of ','Plural of ','Same as ','See ','Present participle of ','Third-person singular simple present indicative form of ','Simple past tense and past participle of ','Archaic form of ']
 
 for i in range(0,8000):
 	words.append(unique_word())
 
-words.sort(cmp=lambda x,y: cmp("".join(l for l in x if l not in '\'-'), "".join(l for l in y if l not in '\'-')))
+words.sort(key=lambda s: ''.join(c for c in s if c not in '\'-'))
 
 dictionary = "Selected Entries from the D'ksuban Dictionary\n2014 Edition"
 cur_letter = ""
@@ -110,11 +111,11 @@ for word in words:
 		definition = get_def.getDefinitions(rand_word.getRandomWord().word,limit=1)[0].text
 		dictionary += u"\u000A"+word+": "
 		dictionary+= check_definition(definition)
-		print word
+		print(word)
 	except:
-		print 'Took too long to respond'
+		print('Took too long to respond')
 
 file = io.open("Selected Entries from the D'ksuban Dictionary.txt",mode="w",encoding='utf-16')
 file.write(dictionary)
 file.close()
-end_program = raw_input("Dictionary completed!")
+print("Dictionary completed!")
