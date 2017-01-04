@@ -1,7 +1,9 @@
-from wordnik import *
 import io
 import os
 import random
+import sys
+
+from wordnik import *
 
 def randchance(n):
 	return random.randint(0, n - 1) == 0
@@ -95,7 +97,12 @@ correction_list = [
 	'Variant of '
 ]
 
-for i in range(0, 8000):
+if len(sys.argv) > 1:
+	num_words = int(sys.argv[1])
+else:
+	num_words = 100
+
+for i in range(num_words):
 	words.append(unique_word())
 
 words.sort(key=lambda s: ''.join(c for c in s if c not in '\'-'))
