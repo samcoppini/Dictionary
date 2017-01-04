@@ -68,7 +68,8 @@ def check_definition(definition):
 			else:
 				return check_definition(get_random_definition())
 	if definition[0:19] == 'The cardinal number':
-		return 'The cardinal number equal to the sum of '+unique_word()+' and '+unique_word()+'.'
+		return ('The cardinal number equal to the sum of ' +
+		        unique_word() + ' and ' + unique_word() + '.')
 	return definition
 
 apiUrl = 'http://api.wordnik.com/v4'
@@ -94,7 +95,7 @@ correction_list = [
 	'Variant of '
 ]
 
-for i in range(0,8000):
+for i in range(0, 8000):
 	words.append(unique_word())
 
 words.sort(key=lambda s: ''.join(c for c in s if c not in '\'-'))
