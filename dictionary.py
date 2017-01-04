@@ -98,7 +98,8 @@ for word in words:
 	except:
 		print('Took too long to respond')
 
-file = io.open("Selected Entries from the D'ksuban Dictionary.txt",mode="w",encoding='utf-16')
-file.write(dictionary)
-file.close()
+filename = "Selected Entries from the D'ksuban Dictionary.txt"
+with io.open(filename, mode="w",encoding='utf-16') as file:
+	file.write(dictionary)
+	
 print("Dictionary completed!")
