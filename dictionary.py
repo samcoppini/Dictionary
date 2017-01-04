@@ -87,16 +87,13 @@ dictionary = "Selected Entries from the D'ksuban Dictionary\n2014 Edition"
 cur_letter = ""
 
 for word in words:
-	try:
-		if word[0] != cur_letter:
-			cur_letter = word[0]
-			dictionary += "\n\n"+cur_letter.capitalize()+":"+u"\u000A"
-		definition = get_def.getDefinitions(rand_word.getRandomWord().word,limit=1)[0].text
-		dictionary += u"\u000A"+word+": "
-		dictionary+= check_definition(definition)
-		print(word)
-	except:
-		print('Took too long to respond')
+	if word[0] != cur_letter:
+		cur_letter = word[0]
+		dictionary += "\n\n" + cur_letter.capitalize() + ":\n"
+	definition = get_def.getDefinitions(rand_word.getRandomWord().word,limit=1)[0].text
+	dictionary += "\n" + word + ": "
+	dictionary+= check_definition(definition)
+	print(word)
 
 filename = "Selected Entries from the D'ksuban Dictionary.txt"
 with io.open(filename, mode="w",encoding='utf-16') as file:
