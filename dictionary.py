@@ -58,7 +58,7 @@ def unique_word():
 		return unique_word()
 
 def get_random_definition():
-	return get_def.getDefinitions(rand_word.getRandomWord().word,limit=1)[0].text
+	return word_api.getDefinitions(words_api.getRandomWord().word,limit=1)[0].text
 
 def check_definition(definition):
 	for correction in correction_list:
@@ -75,8 +75,8 @@ apiUrl = 'http://api.wordnik.com/v4'
 apiKey = os.getenv('API_KEY')
 client = swagger.ApiClient(apiKey, apiUrl)
 
-rand_word = WordsApi.WordsApi(client)
-get_def = WordApi.WordApi(client)
+words_api = WordsApi.WordsApi(client)
+word_api = WordApi.WordApi(client)
 
 words = []
 correction_list = [
