@@ -105,19 +105,19 @@ for i in range(num_words):
 
 words.sort(key=lambda s: ''.join(c for c in s if c not in '\'-'))
 
-dictionary = "Selected Entries from the D'ksuban Dictionary\n2014 Edition"
+dictionary = ["Selected Entries from the D'ksuban Dictionary\n2014 Edition"]
 cur_letter = ""
 
 for word in words:
 	if word[0] != cur_letter:
 		cur_letter = word[0]
-		dictionary += "\n\n" + cur_letter.capitalize() + ":\n"
-	dictionary += "\n" + word + ": "
+		dictionary += ["\n\n", cur_letter.capitalize(), ":\n"]
+	dictionary += ["\n", word, ": "]
 	dictionary += get_random_definition()
 	print(word)
 
 filename = "Selected Entries from the D'ksuban Dictionary.txt"
 with io.open(filename, mode="w",encoding='utf-16') as file:
-	file.write(dictionary)
+	file.write("".join(dictionary))
 
 print("Dictionary completed!")
