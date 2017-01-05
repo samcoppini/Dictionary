@@ -113,7 +113,7 @@ for word in words:
 		cur_letter = word[0]
 		dictionary += ["\n\n", cur_letter.capitalize(), ":\n"]
 	dictionary += ["\n", word, ": "]
-	dictionary += get_random_definition()
+	dictionary.append(get_random_definition())
 	print(word)
 
 filename = "Selected Entries from the D'ksuban Dictionary.txt"
