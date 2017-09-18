@@ -92,7 +92,9 @@ correction_list = [
 	'Third-person singular simple present indicative form of ',
 	'Simple past tense and past participle of ',
 	'Archaic form of ',
-	'Variant of '
+	'Variant of ',
+    'Of or relating to ',
+    'Of or pertaining to ',
 ]
 
 if len(sys.argv) > 1:
